@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Click Story</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  color: white;
+  transition: background 0.8s ease;
+  cursor: pointer;
+}
+
+.text {
+  font-size: 2rem;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+  text-align: center;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body onclick="nextStep()">  <div id="text" class="text">Click</div>  <script>
+    let step = 0;
+
+    const scenes = [
+      {
+        text: "Click",
+        bg: "#0f172a"
+      },
+      {
+        text: "Halo, makasih udah klik",
+        bg: "#1e293b"
+      },
+      {
+        text: "Setiap klik ada ceritanya",
+        bg: "#334155"
+      },
+      {
+        text: "Ini klik keempat",
+        bg: "#475569"
+      },
+      {
+        text: "Terima kasih sudah sampai akhir",
+        bg: "#020617"
+      }
+    ];
+
+    function nextStep() {
+      step++;
+      if (step >= scenes.length) return;
+
+      const textEl = document.getElementById("text");
+      textEl.style.opacity = 0;
+
+      setTimeout(() => {
+        document.body.style.background = scenes[step].bg;
+        textEl.textContent = scenes[step].text;
+        textEl.style.animation = "none";
+        void textEl.offsetWidth; // reset animation
+        textEl.style.animation = "fadeIn 1.5s ease forwards";
+      }, 300);
+    }
+  </script></body>
+</html>
